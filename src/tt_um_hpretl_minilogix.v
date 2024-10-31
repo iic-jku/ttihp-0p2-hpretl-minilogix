@@ -17,7 +17,7 @@ module tt_um_hpretl_minilogix (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-  assign uio_oe = 8'b0000000;  // using IO for input
+  assign uio_oe = 8'b1110_0000;  // using IO for input
   
   minilogix1 #(.NIN(8), .NOUT(8)) logix (
     .clk(clk),
@@ -25,11 +25,12 @@ module tt_um_hpretl_minilogix (
     .o_output(uo_out),
     .i_load_en(uio_in[0]),
     .i_load_clk(uio_in[1]),
-    .i_load_dat(uio_in[2])
+    .i_load_dat(uio_in[2]),
+    .dbg_state(uio_out[7:5])
   );
 
   // All output pins must be assigned. If not used, assign to 0.
-  assign uio_out[7:0] = 8'b000;
+  assign uio_out[4:0] = 5'b00000;
 
   // List all unused inputs to prevent warnings
   wire _unused = &{ena, rst_n, uio_in[7:3], 1'b0};

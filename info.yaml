@@ -23,34 +23,34 @@ project:
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
   # Inputs
-  ui[0]: "SPI clk (SCLK)"
-  ui[1]: "SPI data in (MOSI)"
-  ui[2]: "SPI load (CS)"
-  ui[3]: "select output byte (0 = low, 1 = high)"
-  ui[4]: "sinegen scale factor (LSB)"
-  ui[5]: "sinegen scale factor (MSB)"
-  ui[6]: "select ds-modulator input (0 = SPI register, 1 = sine generator)"
-  ui[7]: "order of delta-sigma modulator (0 = 1st, 1 = 2nd)"
+  ui[0]: "data in0"
+  ui[1]: "data in1"
+  ui[2]: "data in2"
+  ui[3]: "data in3"
+  ui[4]: "data in4"
+  ui[5]: "data in5"
+  ui[6]: "data in6"
+  ui[7]: "data in7"
 
   # Outputs
-  uo[0]: "SPI data out (MISO)"
-  uo[1]: "cookie detected (loaded 0xCAFE)"
-  uo[2]: "XOR of SPI clk and SPI data in"
-  uo[3]: ""
-  uo[4]: ""
-  uo[5]: ""
-  uo[6]: "inverted output of delta-sigma modulator"
-  uo[7]: "output of delta-sigma modulator"
+  uo[0]: "data out0"
+  uo[1]: "data out1"
+  uo[2]: "data out2"
+  uo[3]: "data out3"
+  uo[4]: "data out4"
+  uo[5]: "data out5"
+  uo[6]: "data out6"
+  uo[7]: "data out7"
 
   # Bidirectional pins
-  uio[0]: "register b0|8"
-  uio[1]: "register b1|9"
-  uio[2]: "register b2|10"
-  uio[3]: "register b3|11"
-  uio[4]: "register b4|12"
-  uio[5]: "register b5|13"
-  uio[6]: "register b6|14"
-  uio[7]: "register b7|15"
+  uio[0]: "load enable"
+  uio[1]: "load clk"
+  uio[2]: "load data"
+  uio[3]: ""
+  uio[4]: ""
+  uio[5]: "dbg out0"
+  uio[6]: "dbg out1"
+  uio[7]: "dbg out2"
 
 # Do not change!
 yaml_version: 6
