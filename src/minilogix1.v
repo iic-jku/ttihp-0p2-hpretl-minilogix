@@ -15,7 +15,25 @@
 * limitations under the License.
 * SPDX-License-Identifier: Apache-2.0
 *
-* Freely programmable logic block with optional feedback
+* Function: Freely programmable logic block with optional feedback
+*
+* The logic block is organized as a RAM (built from flip flops) where
+* the input data forms the address, and the outputs are taken from the
+* words. In this way any logic function can be realized by filling the
+* RAM accordingly.
+*
+* The RAM can be loaded serially when i_load_en=1. The data at
+* i_load_dat is clocked in with i_load_clk. The MSB is loaded first.
+*
+* The input data to the RAM can be optionally taken from the output via
+* a feedback register, clocked with clk. The first loaded word selects
+* if input or feedback is used for addressing the RAM. In this way a
+* state machine can be realized.
+*
+* Configuration in the moment can be cumbersome as the appropriate serial
+* bitstring has to be handcrafted. It is envisioned that SW support should
+* be available in the future where a simple logic function (given in HDL)
+* can be mapped to this bitstring.
 */
 
 `default_nettype none
@@ -44,10 +62,15 @@ module minilogix1 #(parameter NIN=8, NOUT=8) (
 
 	// if the input selection bit is 0, then the input is taken; otherwise the
 	// respective output is feed back
-	genvar j;
+	genvar i,j;
 	generate for(j=0; j<NCFG; j=j+1)
 		begin: input_selection
 			assign ram_sel_w[j] = input_sel_cfg_w[j] ? feedback_r[j] : i_input[j];
+		end
+	endgenerate
+	generate for(i=NCFG; i<NIN; i=i+1)
+		begin: input_fixed
+			assign ram_sel_w[i] = i_input[i];
 		end
 	endgenerate
 
